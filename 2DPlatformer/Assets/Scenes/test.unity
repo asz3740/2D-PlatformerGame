@@ -154,11 +154,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 2
+  extraAttacks: 1
   groundCheck: {fileID: 495855743}
   groundCheckL: {fileID: 1501441183}
   groundCheckR: {fileID: 169179092}
   airControl: 0
   jumpForce: 150
+  extraJumps: 0
+  extraJumpsValue: 1
 --- !u!95 &142840681
 Animator:
   serializedVersion: 3
@@ -502,6 +505,7 @@ GameObject:
   - component: {fileID: 1315325763}
   - component: {fileID: 1315325762}
   - component: {fileID: 1315325761}
+  - component: {fileID: 1315325764}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -544,7 +548,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 1.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -568,12 +572,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315325760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.32, y: 0.23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1315325764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315325760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d475ab3f8751354584cb076859162b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 142840679}
+  timeOffset: 2
+  posOffset: {x: 0, y: 0}
 --- !u!1 &1501441182
 GameObject:
   m_ObjectHideFlags: 0

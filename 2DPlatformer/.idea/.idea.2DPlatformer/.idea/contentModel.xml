@@ -7,6 +7,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="CameraFollow2D.cs" t="Include" />
+          <e p="CameraFollow2D1.cs" t="Include" />
           <e p="Character.cs" t="Include" />
           <e p="ComboAttack.cs" t="Include" />
           <e p="EnemyMovement.cs" t="Include" />

@@ -123,7 +123,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 isGrounded = false;
             }
-            if (Input.GetKey("right"))
+            if (Input.GetKey("right") )
             {
                 rigid.velocity = new Vector2(2, rigid.velocity.y);
             

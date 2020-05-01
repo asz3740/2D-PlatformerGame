@@ -11,7 +11,11 @@ public class Player : MonoBehaviour
     private float movementSpeed;
 
     private bool attack;
+    [SerializeField]
+    private int extraAttacks;
 
+    private float attackTimer;
+    
     private bool roll;
     
     private bool facingRight;
@@ -35,8 +39,14 @@ public class Player : MonoBehaviour
     private bool airControl;
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    private int extraJumps;
+    [SerializeField]
+    private int extraJumpsValue;
     void Start()
     {
+        extraAttacks = 1;
+        extraJumps = extraJumpsValue;
         facingRight = true;
         myRigid = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
@@ -45,6 +55,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleInput();
+     
+        //Debug.Log(attackTimer);
     }
 
     // Update is called once per frame
@@ -57,7 +69,7 @@ public class Player : MonoBehaviour
         
         Flip(horizontal);
         
-        HandleAttacks();
+        HandleAttacks(horizontal);
         
         HandleLayers();
         
@@ -76,11 +88,24 @@ public class Player : MonoBehaviour
             myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
         }
 
-        if (isGrounded && jump)
+
+        if (jump && extraJumps > 0)
         {
-            isGrounded = false;
+            //isGrounded = false;
+            extraJumps--;
             myRigid.AddForce(new Vector2(0, jumpForce));
             myAnim.SetTrigger("jump");
+        }
+        else if (isGrounded && jump && extraJumps == 0)
+        {
+            //isGrounded = false;
+            myRigid.AddForce(new Vector2(0, jumpForce));
+            myAnim.SetTrigger("jump");
+        }
+
+        if (isGrounded == true)
+        {
+            extraJumps = extraJumpsValue;
         }
         
         if (roll && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsName("Player_Roll"))
@@ -94,15 +119,36 @@ public class Player : MonoBehaviour
         
         myAnim.SetFloat("speed",Mathf.Abs(horizontal));
     }
-    
-    private void HandleAttacks()
+
+    private int count1;
+    private int count2;
+
+    private void HandleAttacks(float horizontal)
     {
-        if (attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        attackTimer += Time.deltaTime;
+        if ((attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && attackTimer > 0.5) || (attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && extraAttacks > 4))
         {
-            myAnim.SetTrigger("attack");
+            count1++;
+            Debug.Log("1-" +count1);
+            myAnim.SetTrigger("attack1");
             myRigid.velocity = Vector2.zero;
+            transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
+            extraAttacks = 2;
+            attackTimer = 0;
+        }
+        else if (attack && extraAttacks > 0 && extraAttacks <= 4 && attackTimer <= 0.5)
+        {
+            count2++;
+            Debug.Log("2-" +count2);
+            myAnim.SetTrigger("attack" +extraAttacks);
+            extraAttacks++;
+            myRigid.velocity = Vector2.zero;
+            transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
+            attackTimer = 0;
         }
     }
+    
+
 
     private void HandleInput()
     {
