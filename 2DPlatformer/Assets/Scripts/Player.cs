@@ -10,11 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] 
     private float movementSpeed;
 
-    private bool attack;
-    [SerializeField]
-    private int extraAttacks;
 
-    private float attackTimer;
     
     private bool roll;
     
@@ -31,6 +27,7 @@ public class Player : MonoBehaviour
     [SerializeField] 
     private Transform groundCheckR;
     
+    // 점프
     private bool isGrounded;
     // [SerializeField]
     // private LayerMask whatIsGround;
@@ -43,8 +40,18 @@ public class Player : MonoBehaviour
     private int extraJumps;
     [SerializeField]
     private int extraJumpsValue;
+    
+    // 공격
+    private bool attack;
+    [SerializeField]
+    private int extraAttacks;
+    private float attackTimer;
+    [SerializeField] 
+    private GameObject attackHitBox;
+    
     void Start()
     {
+        attackHitBox.SetActive(false);
         extraAttacks = 1;
         extraJumps = extraJumpsValue;
         facingRight = true;
@@ -131,6 +138,7 @@ public class Player : MonoBehaviour
             count1++;
             Debug.Log("1-" +count1);
             myAnim.SetTrigger("attack1");
+            // StartCoroutine(DoAttack());
             myRigid.velocity = Vector2.zero;
             transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
             extraAttacks = 2;
@@ -141,11 +149,32 @@ public class Player : MonoBehaviour
             count2++;
             Debug.Log("2-" +count2);
             myAnim.SetTrigger("attack" +extraAttacks);
+            // StartCoroutine(DoAttack());
             extraAttacks++;
             myRigid.velocity = Vector2.zero;
             transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
             attackTimer = 0;
         }
+    }
+    // int count=0;
+    // IEnumerator DoAttack()
+    // {
+    //     
+    //     count++;
+    //     Debug.Log(count);
+    //     attackHitBox.SetActive(true);
+    //     yield return new WaitForSeconds(0.1f);
+    //     attackHitBox.SetActive(false);
+    // }
+
+    private void AttackHitBoxOn()
+    {
+        attackHitBox.SetActive(true);
+    }
+    
+    private void AttackHitBoxOff()
+    {
+        attackHitBox.SetActive(false);
     }
     
 

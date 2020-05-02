@@ -2,27 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow2D1 : MonoBehaviour
-{
-    [SerializeField]
-    private float xMax;
-    [SerializeField]
-    private float yMax;
-    [SerializeField]
-    private float xMin;
-    [SerializeField]
-    private float yMin;
+public class CameraFollow2D1 : MonoBehaviour {
 
-    private Transform target;
-    
-    void Start()
-    {
-        target = GameObject.Find("Player").transform;
+    //offset from the viewport center to fix damping
+    public float m_DampTime = 10f;
+    public Transform m_Target;
+    public float m_XOffset = 0;
+    public float m_YOffset = 0;
+
+    private float margin = 0.1f;
+
+    void Start () {
+        if (m_Target==null){
+            m_Target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        transform.position = new Vector3(Mathf.Clamp(target.position.x,xMin,xMax), Mathf.Clamp(target.position.y, yMin,yMax), transform.position.z);
+    void Update() {
+        if(m_Target) {
+            float targetX = m_Target.position.x + m_XOffset;
+            float targetY = m_Target.position.y + m_YOffset;
+
+            if (Mathf.Abs(transform.position.x - targetX) > margin)
+                targetX = Mathf.Lerp(transform.position.x, targetX, 1/m_DampTime * Time.deltaTime);
+
+            if (Mathf.Abs(transform.position.y - targetY) > margin)
+                targetY = Mathf.Lerp(transform.position.y, targetY, m_DampTime * Time.deltaTime);
+            
+            transform.position = new Vector3(targetX, targetY, transform.position.z);
+        }
     }
 }

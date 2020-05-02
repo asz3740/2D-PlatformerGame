@@ -10,6 +10,8 @@
           <e p="CameraFollow2D1.cs" t="Include" />
           <e p="Character.cs" t="Include" />
           <e p="ComboAttack.cs" t="Include" />
+          <e p="Enemy.cs" t="Include" />
+          <e p="EnemyDamaged.cs" t="Include" />
           <e p="EnemyMovement.cs" t="Include" />
           <e p="FollowCamera.cs" t="Include" />
           <e p="Patrol.cs" t="Include" />
