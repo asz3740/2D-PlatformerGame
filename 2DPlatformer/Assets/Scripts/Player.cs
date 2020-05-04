@@ -6,15 +6,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D myRigid;
-    private Animator myAnim;
-    [SerializeField] 
-    private float movementSpeed;
+
+   
 
 
     
     private bool roll;
     
-    private bool facingRight;
+  
 
     // [SerializeField]
     // private Transform[] groundChecks;
@@ -49,6 +48,10 @@ public class Player : MonoBehaviour
     [SerializeField] 
     private GameObject attackHitBox;
     
+    private Animator myAnim;
+    [SerializeField] 
+    private float movementSpeed;
+    private bool facingRight;
     void Start()
     {
         attackHitBox.SetActive(false);
