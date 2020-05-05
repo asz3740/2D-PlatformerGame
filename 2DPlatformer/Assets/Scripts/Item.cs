@@ -22,7 +22,7 @@ public class Item
         itemName = _itemName;
         itemDescription = _itemDes;
         itemType = _itemType;
-        itemIcon = Resources.Load("ItemIcon/" + _itemID.ToString(), typeof(Sprite)) as Sprite;
+        itemIcon = Resources.Load("itemIcon/" + _itemID.ToString(), typeof(Sprite)) as Sprite;
     }
     void Start()
     {

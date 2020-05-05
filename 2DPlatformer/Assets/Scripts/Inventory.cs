@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,26 +13,27 @@ public class Inventory : MonoBehaviour
     // public string open_Sound;
     // public string beep_Sound;
 
-    private InventorySlot[] slots;
-    private List<Item> inventoryItemList;
-    private List<Item> inventoryTabList;
+    private InventorySlot[] slots; // 인벤토리 슬롯들
+    private List<Item> inventoryItemList; // 플레이어가 소지한 아이템 리스트
+    private List<Item> inventoryTabList; // 선택한 탭에 따라 다르게 보여질 아이템 리스트
 
-    public Text Description_Text;
-    public string[] tabDescription;
+    public Text Description_Text; // 부연 설명
+    public Text Name_Text; // 아이템 이름
+    public string[] tabDescription; // 탬 부연 설명
 
-    public Transform tf;
+    public Transform tf; // slot 부모객체
 
-    public GameObject go;
-    public GameObject[] selectedTabImage;
+    public GameObject go; // 인벤토리 활성화 비활성화
+    public GameObject[] selectedTabImage; // slot 패널
 
-    private int selectedItem;
-    private int selectedTab;
+    private int selectedItem; // 선택된 아이템 넘버 
+    private int selectedTab; // 선택된 템
 
-    private bool activated;
-    private bool tabActivated;
-    private bool itemActivated;
-    private bool stopKeyInput;
-    private bool preventExec;
+    private bool activated = false; // 인벤토리 활성화 시 true
+    private bool tabActivated; // 탭 활성화 시 true
+    private bool itemActivated; // 아이템 활성화 시 true
+    private bool stopKeyInput; // 키 입력 제한
+    private bool preventExec; // 
     
     private WaitForSeconds waitTime = new WaitForSeconds(0.01f);
     void Start()
@@ -41,9 +43,35 @@ public class Inventory : MonoBehaviour
        inventoryTabList = new List<Item>();
        slots = tf.GetComponentsInChildren<InventorySlot>();
        inventoryItemList.Add(new Item(10001,"주문서", "이이이잉", Item.ItemType.Quest));
-       //itemList.Add(new Item(10002,"책", "ㅁㄴ리ㅏㅓㅁ;ㅣ러", Item.ItemType.Quest));
-       inventoryItemList.Add(new Item(10003,"빨간 폰션", "체력 50", Item.ItemType.Combat));
-       //itemList.Add(new Item(10004,"파란 폰션", "마나 50", Item.ItemType.Combat));
+        //itemList.Add(new Item(10002,"책", "ㅁㄴ리ㅏㅓㅁ;ㅣ러", Item.ItemType.Quest));
+        inventoryItemList.Add(new Item(10003,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10004,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // //itemList.Add(new Item(10004,"파란 폰션", "마나 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10005,"주문서", "이이이잉", Item.ItemType.Quest));
+        // //itemList.Add(new Item(10002,"책", "ㅁㄴ리ㅏㅓㅁ;ㅣ러", Item.ItemType.Quest));
+        // inventoryItemList.Add(new Item(10006,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10007,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // //itemList.Add(new Item(10004,"파란 폰션", "마나 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10008,"주문서", "이이이잉", Item.ItemType.Quest));
+        // //itemList.Add(new Item(10002,"책", "ㅁㄴ리ㅏㅓㅁ;ㅣ러", Item.ItemType.Quest));
+        // inventoryItemList.Add(new Item(10009,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10010,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // //itemList.Add(new Item(10004,"파란 폰션", "마나 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10011,"주문서", "이이이잉", Item.ItemType.Quest));
+        // //itemList.Add(new Item(10002,"책", "ㅁㄴ리ㅏㅓㅁ;ㅣ러", Item.ItemType.Quest));
+        // inventoryItemList.Add(new Item(10012,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10013,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // //itemList.Add(new Item(10004,"파란 폰션", "마나 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10014,"주문서", "이이이잉", Item.ItemType.Quest));
+        // //itemList.Add(new Item(10002,"책", "ㅁㄴ리ㅏㅓㅁ;ㅣ러", Item.ItemType.Quest));
+        // inventoryItemList.Add(new Item(10015,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10016,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // //itemList.Add(new Item(10004,"파란 폰션", "마나 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10017,"주문서", "이이이잉", Item.ItemType.Quest));
+        // //itemList.Add(new Item(10002,"책", "ㅁㄴ리ㅏㅓㅁ;ㅣ러", Item.ItemType.Quest));
+        // inventoryItemList.Add(new Item(10018,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // inventoryItemList.Add(new Item(10019,"빨간 폰션", "체력 50", Item.ItemType.Combat));
+        // //itemList.Add(new Item(10004,"파란 폰션", "마나 50", Item.ItemType.Combat));
     }
 
     // 탭 활성화
@@ -68,7 +96,7 @@ public class Inventory : MonoBehaviour
         StopAllCoroutines();
         Color color = selectedTabImage[selectedTab].GetComponent<Image>().color;
         color.a = 0f;
-        for (int i = 0; i > selectedTabImage.Length; i++)
+        for (int i = 0; i < selectedTabImage.Length; i++)
         {
             selectedTabImage[i].GetComponent<Image>().color = color;
         }
@@ -85,13 +113,13 @@ public class Inventory : MonoBehaviour
             while (color.a < 0.5f)
             {
                 color.a += 0.03f;
-                selectedTabImage[0].GetComponent<Image>().color = color;
+                selectedTabImage[selectedTab].GetComponent<Image>().color = color;
                 yield return waitTime;
             }
             while (color.a > 0f)
             {
                 color.a -= 0.03f;
-                selectedTabImage[0].GetComponent<Image>().color = color;
+                selectedTabImage[selectedTab].GetComponent<Image>().color = color;
                 yield return waitTime;
             }
             
@@ -100,7 +128,7 @@ public class Inventory : MonoBehaviour
     }
 
     // 아이템 활성화 (inventoryTabList에 조건에 맞는 아이템들만 넣어주고, 인벤토리 슬롯에 출력)
-    public void ShowItem()
+    public void ShowItem() 
     {
         inventoryTabList.Clear();
         RemoveSlot();
@@ -113,7 +141,7 @@ public class Inventory : MonoBehaviour
             case 0:
                 for (int i = 0; i < inventoryItemList.Count; i++)
                 {
-                    if (Item.ItemType.Combat == inventoryItemList[i].itemType)
+                    if (Item.ItemType.Quest == inventoryItemList[i].itemType)
                     {
                         inventoryTabList.Add(inventoryItemList[i]);
                     }
@@ -124,7 +152,7 @@ public class Inventory : MonoBehaviour
             case 1:
                 for (int i = 0; i < inventoryItemList.Count; i++)
                 {
-                    if (Item.ItemType.Quest == inventoryItemList[i].itemType)
+                    if (Item.ItemType.Combat == inventoryItemList[i].itemType)
                     {
                         inventoryTabList.Add(inventoryItemList[i]);
                     }
@@ -185,6 +213,10 @@ public class Inventory : MonoBehaviour
     
     void Update()
     {
+       print(inventoryItemList.Count);
+       print(inventoryTabList.Count);
+       print(selectedTab);
+       print(selectedTabImage.Length);
         if (!stopKeyInput)
         {
             if (Input.GetKeyDown(KeyCode.I))
@@ -210,7 +242,7 @@ public class Inventory : MonoBehaviour
                 }
             }
 
-            if (activated)
+            if  (activated)
             {
                 // 탭 활성화 시 키입력 처리
                 if (tabActivated)
@@ -225,8 +257,8 @@ public class Inventory : MonoBehaviour
                         {
                             selectedTab = 0;
                             //theAudio.Play(key_sound);
-                            SelectedTab();
                         }
+                        SelectedTab();
                     }
                     else if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
@@ -238,8 +270,8 @@ public class Inventory : MonoBehaviour
                         {
                             selectedTab = selectedTabImage.Length - 1;
                             //theAudio.Play(key_sound);
-                            SelectedTab();
                         }
+                        SelectedTab();
                     }
                     else if (Input.GetKeyDown(KeyCode.Z))
                     {
@@ -262,17 +294,17 @@ public class Inventory : MonoBehaviour
                             if (selectedItem < inventoryTabList.Count - 4)
                                 selectedItem += 4;
                             else
-                                selectedItem %= 2;
+                                selectedItem %= 4;
                             //theAudio.Play(key_Sound);
                             SelectedItem();
 
                         }
                         else if (Input.GetKeyDown(KeyCode.UpArrow))
                         {
-                            if (selectedItem > 1)
+                            if (selectedItem > 4)
                                 selectedItem -= 4;
                             else
-                                selectedItem = inventoryTabList.Count - 1 - selectedItem;
+                                selectedItem = (inventoryTabList.Count + selectedItem) - 3;
                             //theAudio.Play(key_Sound);
                             SelectedItem();
                         }
