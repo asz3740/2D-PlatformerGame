@@ -431,7 +431,7 @@ SpriteRenderer:
   m_Size: {x: 0.72, y: 0.74}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &499129870
@@ -716,7 +716,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1224,7 +1224,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.55, y: 2.4}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1248,7 +1248,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 1.55, y: 2.4}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1275,7 +1275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1843028248
 Animator:
   serializedVersion: 3
@@ -1347,8 +1347,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23249247bc9786949bec3b23fbf4efa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: 0
-  animator: {fileID: 0}
+  groundCheck: {fileID: 0}
+  groundCheckL: {fileID: 0}
+  groundCheckR: {fileID: 0}
+  airControl: 0
+  jumpForce: 0
+  extraJumps: 0
+  extraJumpsValue: 0
+  extraAttacks: 0
+  attackHitBox: {fileID: 0}
+  movementSpeed: 0
 --- !u!114 &1843028252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,7 +1535,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.31, y: 0.48}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

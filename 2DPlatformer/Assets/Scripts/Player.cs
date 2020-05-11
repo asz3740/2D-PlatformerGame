@@ -6,15 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D myRigid;
-
-   
-
-
+    
     
     private bool roll;
-    
-  
-
     // [SerializeField]
     // private Transform[] groundChecks;
     // [SerializeField] 
