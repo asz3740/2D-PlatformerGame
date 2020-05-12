@@ -1,18 +1,33 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Player : MonoBehaviour
+
+public class Player : Character
 {
-    private Rigidbody2D myRigid;
+
+    private static Player instance;
+    
+    public static Player Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<Player>();
+            }
+            return instance;
+        }
+    }
     
     
-    private bool roll;
+    
     // [SerializeField]
     // private Transform[] groundChecks;
     // [SerializeField] 
     // private float groundRadius;
+    //
+    // [SerializeField]
+    // private Transform[] groundPoints;
     [SerializeField] 
     private Transform groundCheck;
     [SerializeField] 
@@ -21,10 +36,10 @@ public class Player : MonoBehaviour
     private Transform groundCheckR;
     
     // 점프
-    private bool isGrounded;
+    //private bool isGrounded;
     // [SerializeField]
     // private LayerMask whatIsGround;
-    private bool jump;
+    //private bool jump;
     [SerializeField]
     private bool airControl;
     [SerializeField]
@@ -35,32 +50,44 @@ public class Player : MonoBehaviour
     private int extraJumpsValue;
     
     // 공격
-    private bool attack;
+    //private bool attack;
     [SerializeField]
     private int extraAttacks;
     private float attackTimer;
-    [SerializeField] 
-    private GameObject attackHitBox;
+    //[SerializeField] 
+    //private GameObject attackHitBox;
     
-    private Animator myAnim;
-    [SerializeField] 
-    private float movementSpeed;
-    private bool facingRight;
-    void Start()
+
+
+    
+    public Rigidbody2D myRigid  { get; set; }
+  
+    public bool Roll { get; set; }
+    public bool Jump { get; set; }
+    public bool OnGround { get; set; }
+
+
+ 
+    public override void Start()
     {
-        attackHitBox.SetActive(false);
+        //attackHitBox.SetActive(false);
+        base.Start();
         extraAttacks = 1;
         extraJumps = extraJumpsValue;
-        facingRight = true;
+  
         myRigid = GetComponent<Rigidbody2D>();
-        myAnim = GetComponent<Animator>();
+    
     }
 
     void Update()
     {
         HandleInput();
-     
+        print(instance);
+        print(Attack);
+        print(myRigid.velocity.y);
+        print("jump"+Jump);
         //Debug.Log(attackTimer);
+        
     }
 
     // Update is called once per frame
@@ -68,16 +95,15 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
 
-        isGrounded = IsGrounded();
+        OnGround = IsGrounded();
         HandleMovement(horizontal);
         
         Flip(horizontal);
         
-        HandleAttacks(horizontal);
+        //HandleAttacks(horizontal);
         
         HandleLayers();
-        
-        ResetValues();
+
     }
 
     private void HandleMovement(float horizontal)
@@ -86,73 +112,49 @@ public class Player : MonoBehaviour
         {
             myAnim.SetBool("land",true);
         }
-        
-        if ( !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
+
+        if (!Attack && (OnGround || airControl))
         {
             myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
         }
 
-
-        if (jump && extraJumps > 0)
+        if (Jump && myRigid.velocity.y == 0)
         {
-            //isGrounded = false;
-            extraJumps--;
             myRigid.AddForce(new Vector2(0, jumpForce));
-            myAnim.SetTrigger("jump");
-        }
-        else if (isGrounded && jump && extraJumps == 0)
-        {
-            //isGrounded = false;
-            myRigid.AddForce(new Vector2(0, jumpForce));
-            myAnim.SetTrigger("jump");
-        }
-
-        if (isGrounded == true)
-        {
-            extraJumps = extraJumpsValue;
         }
         
-        if (roll && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsName("Player_Roll"))
-        {
-            myAnim.SetBool("roll",true);
-        }
-        else if(!this.myAnim.GetCurrentAnimatorStateInfo(0).IsName("Player_Roll"))
-        {
-            myAnim.SetBool("roll",false);
-        }
+        myAnim.SetFloat("speed", Mathf.Abs(horizontal));
         
-        myAnim.SetFloat("speed",Mathf.Abs(horizontal));
     }
 
-    private int count1;
-    private int count2;
-
-    private void HandleAttacks(float horizontal)
-    {
-        attackTimer += Time.deltaTime;
-        if ((attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && attackTimer > 0.5) || (attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && extraAttacks > 4))
-        {
-            count1++;
-            Debug.Log("1-" +count1);
-            myAnim.SetTrigger("attack1");
-            // StartCoroutine(DoAttack());
-            myRigid.velocity = Vector2.zero;
-            transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
-            extraAttacks = 2;
-            attackTimer = 0;
-        }
-        else if (attack && extraAttacks > 0 && extraAttacks <= 4 && attackTimer <= 0.5)
-        {
-            count2++;
-            Debug.Log("2-" +count2);
-            myAnim.SetTrigger("attack" +extraAttacks);
-            // StartCoroutine(DoAttack());
-            extraAttacks++;
-            myRigid.velocity = Vector2.zero;
-            transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
-            attackTimer = 0;
-        }
-    }
+    // private int count1;
+    // private int count
+    // private void HandleAttacks(float horizontal)
+    // {
+    //     attackTimer += Time.deltaTime;
+    //     if ((attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && attackTimer > 0.5) || (attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && extraAttacks > 4))
+    //     {
+    //         count1++;
+    //         Debug.Log("1-" +count1);
+    //         myAnim.SetTrigger("attack1");
+    //         // StartCoroutine(DoAttack());
+    //         myRigid.velocity = Vector2.zero;
+    //         transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
+    //         extraAttacks = 2;
+    //         attackTimer = 0;
+    //     }
+    //     else if (attack && extraAttacks > 0 && extraAttacks <= 4 && attackTimer <= 0.5)
+    //     {
+    //         count2++;
+    //         Debug.Log("2-" +count2);
+    //         myAnim.SetTrigger("attack" +extraAttacks);
+    //         // StartCoroutine(DoAttack());
+    //         extraAttacks++;
+    //         myRigid.velocity = Vector2.zero;
+    //         transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
+    //         attackTimer = 0;
+    //     }
+    // }
     // int count=0;
     // IEnumerator DoAttack()
     // {
@@ -164,32 +166,34 @@ public class Player : MonoBehaviour
     //     attackHitBox.SetActive(false);
     // }
 
-    private void AttackHitBoxOn()
-    {
-        attackHitBox.SetActive(true);
-    }
-    
-    private void AttackHitBoxOff()
-    {
-        attackHitBox.SetActive(false);
-    }
-    
+    // private void AttackHitBoxOn()
+    // {
+    //     attackHitBox.SetActive(true);
+    // }
+    //
+    // private void AttackHitBoxOff()
+    // {
+    //     attackHitBox.SetActive(false);
+    // }
+    //
 
 
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jump = true;
+            myAnim.SetTrigger("jump");
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            attack = true;
+            print("1."+Attack);
+            myAnim.SetTrigger("attack1");
+            print("2."+Attack);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            roll = true;
+            myAnim.SetTrigger("roll");
         }
     }
     
@@ -199,32 +203,16 @@ public class Player : MonoBehaviour
     {
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
-            facingRight = !facingRight;
-
-            Vector3 scale = transform.localScale;
-
-            scale.x *= -1;
-
-            transform.localScale = scale;
+            ChangeDirection();
         }
     }
-
-    private void ResetValues()
-    {
-        attack = false;
-        roll = false;
-        jump = false;
-    }
-
     private bool IsGrounded()
     {
-
+    
         if ((Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) ||
             (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
             (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))))
         {
-            myAnim.ResetTrigger("jump");
-            myAnim.SetBool("land", false);
             return true;
         }
         else
@@ -237,7 +225,7 @@ public class Player : MonoBehaviour
 
     private void HandleLayers()
     {
-        if (!isGrounded)
+        if (!OnGround)
         {
             myAnim.SetLayerWeight(1, 1);
         }
