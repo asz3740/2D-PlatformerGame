@@ -194,7 +194,7 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.J))
         {
             print("1."+Attack);
-            myAnim.SetTrigger("attack1");
+            //myAnim.SetTrigger("attack1");
             print("2."+Attack);
         }
 
