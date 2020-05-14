@@ -19,6 +19,15 @@
             <e p="Enemy.cs" t="Include" />
             <e p="EnemyDamaged.cs" t="Include" />
             <e p="EnemyMovement.cs" t="Include" />
+            <e p="EnemySight.cs" t="Include" />
+            <e p="EnemyStates" t="Include">
+              <e p="IdleState.cs" t="Include" />
+              <e p="IEnemyState.cs" t="Include" />
+              <e p="MeleeState.cs" t="Include" />
+              <e p="PatrolState.cs" t="Include" />
+              <e p="RangedState.cs" t="Include" />
+            </e>
+            <e p="IgnoreCollision.cs" t="Include" />
             <e p="Patrol.cs" t="Include" />
           </e>
           <e p="Ground" t="Include">

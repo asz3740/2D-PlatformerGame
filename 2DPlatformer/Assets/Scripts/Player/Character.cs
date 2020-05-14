@@ -4,16 +4,18 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected Animator myAnim;
+  
     [SerializeField] 
     protected float movementSpeed;
     protected bool facingRight;
     public bool Attack { get; set; }
+    
+    public Animator MyAnim { get; private set; }
     public virtual void Start()
     {
         facingRight = true;
         
-        myAnim = GetComponent<Animator>();
+        MyAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,4 +29,5 @@ public abstract class Character : MonoBehaviour
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
     }
+    
 }

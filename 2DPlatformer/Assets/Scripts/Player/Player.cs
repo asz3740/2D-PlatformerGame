@@ -110,7 +110,7 @@ public class Player : Character
     {
         if (myRigid.velocity.y < 0)
         {
-            myAnim.SetBool("land",true);
+            MyAnim.SetBool("land",true);
         }
 
         if (!Attack && (OnGround || airControl))
@@ -123,7 +123,7 @@ public class Player : Character
             myRigid.AddForce(new Vector2(0, jumpForce));
         }
         
-        myAnim.SetFloat("speed", Mathf.Abs(horizontal));
+        MyAnim.SetFloat("speed", Mathf.Abs(horizontal));
         
     }
 
@@ -182,18 +182,18 @@ public class Player : Character
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            myAnim.SetTrigger("jump");
+            MyAnim.SetTrigger("jump");
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             print("1."+Attack);
-            myAnim.SetTrigger("attack1");
+            MyAnim.SetTrigger("attack1");
             print("2."+Attack);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            myAnim.SetTrigger("roll");
+            MyAnim.SetTrigger("roll");
         }
     }
     
@@ -227,11 +227,11 @@ public class Player : Character
     {
         if (!OnGround)
         {
-            myAnim.SetLayerWeight(1, 1);
+            MyAnim.SetLayerWeight(1, 1);
         }
         else
         {
-            myAnim.SetLayerWeight(1, 0);
+            MyAnim.SetLayerWeight(1, 0);
         }
         
     }
