@@ -70,7 +70,7 @@ public class Player : Character
  
     public override void Start()
     {
-        //attackHitBox.SetActive(false);
+        attackHitBox.SetActive(false);
         base.Start();
         extraAttacks = 1;
         extraJumps = extraJumpsValue;
