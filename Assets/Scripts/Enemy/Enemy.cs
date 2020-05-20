@@ -12,6 +12,36 @@ public class Enemy : Character
     [SerializeField]
     private float meleeRange;
 
+    [SerializeField] 
+    private float throwRange;
+
+    public bool InMeleeRange
+    {
+        get
+        {
+            if (Target != null)
+            {
+                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+            }
+
+            return false;
+        }
+    }
+    
+    public bool InThrowRange
+    {
+        get
+        {
+            if (Target != null)
+            {
+                return Vector2.Distance(transform.position, Target.transform.position) <= throwRange;
+            }
+
+            return false;
+        }
+    }
+
+
 
     public override void Start()
     {

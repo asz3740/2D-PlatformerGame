@@ -19,16 +19,19 @@ public class RangedState : IEnemyState
     public void Execute()
     {
         ThrowObject();
-        
-        if (enemy.Target != null)
+        if (enemy.InMeleeRange)
+        {
+            enemy.ChangeState(new MeleeState());
+        }
+        else if (enemy.Target != null)
         {
             Debug.Log("follow");
             enemy.Move();
         }
-        // else
-        // {
-        //     enemy.ChangeState(new IdleState());
-        // }
+        else
+        {
+            enemy.ChangeState(new IdleState());
+        }
     }
 
     public void Exit()
