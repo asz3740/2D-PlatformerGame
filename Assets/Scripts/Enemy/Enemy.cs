@@ -9,6 +9,10 @@ public class Enemy : Character
 
     public GameObject Target { get; set; }
 
+    [SerializeField]
+    private float meleeRange;
+
+
     public override void Start()
     {
         base.Start();
@@ -18,7 +22,7 @@ public class Enemy : Character
     void Update()
     {
         currentState.Execute();
-        
+        //
         LookAtTarget();
     }
 
@@ -27,8 +31,9 @@ public class Enemy : Character
         if (Target != null)
         {
             float xDir = Target.transform.position.x - transform.position.x;
-            if (xDir < 0 && facingRight || xDir > 0 && !facingRight)
+            if (xDir < 0 && !facingRight || xDir > 0 && facingRight)
             {
+                print("타켓있음");
                 ChangeDirection();
             }
         }
@@ -41,7 +46,7 @@ public class Enemy : Character
         {
             currentState.Exit();
         }
-
+        
         currentState = newState;
         
         currentState.Enter(this);
@@ -49,17 +54,21 @@ public class Enemy : Character
 
     public void Move()
     {
-        MyAnim.SetFloat("speed",1);
-        transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+        if (!Attack)
+        {
+            MyAnim.SetFloat("speed",1);
+            transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+        }
     }
 
     public Vector2 GetDirection()
     {
-        return facingRight ? Vector2.right : Vector2.left;
+         return !facingRight ? Vector2.right : Vector2.left ;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         currentState.OnTriggerEnter(other);
     }
+    
 }

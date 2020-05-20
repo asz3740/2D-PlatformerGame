@@ -11,7 +11,9 @@ public class EnemySight : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+           
             enemy.Target = other.gameObject;
+            print("333"+enemy.Target);
         }
     }
 

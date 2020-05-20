@@ -18,9 +18,9 @@ public class PatrolState : IEnemyState
     {
         Debug.Log("Patrol");
         Patrol();
-        
+        //
         enemy.Move();
-
+        //
         if (enemy.Target != null)
         {
             enemy.ChangeState(new RangedState());

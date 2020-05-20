@@ -37,7 +37,7 @@ public class IdleState : IEnemyState
     private void Idle()
     {
         enemy.MyAnim.SetFloat("speed",0);
-
+        
         idleTimer += Time.deltaTime;
         
         if (idleTimer >= idleDuration)

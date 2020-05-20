@@ -18,7 +18,8 @@ public class Player : Character
             return instance;
         }
     }
-    
+
+   
     
     
     // [SerializeField]
@@ -56,7 +57,8 @@ public class Player : Character
     private float attackTimer;
     //[SerializeField] 
     //private GameObject attackHitBox;
-    
+
+   
 
 
     
@@ -195,6 +197,12 @@ public class Player : Character
         {
             MyAnim.SetTrigger("roll");
         }
+        
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            MyAnim.SetTrigger("throw");
+        }
+        
     }
     
     
@@ -233,6 +241,10 @@ public class Player : Character
         {
             MyAnim.SetLayerWeight(1, 0);
         }
-        
+    }
+    
+    public override void ThrowObject()
+    { 
+        base.ThrowObject();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,18 @@ public class AttackBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player.Instance.Attack = true;
-        if (Player.Instance.OnGround)
+        animator.GetComponent<Character>().Attack = true;
+        
+        animator.SetFloat("speed",0);
+        
+        if (animator.tag == "Player")
         {
-            Player.Instance.myRigid.velocity = Vector2.zero;
+            if (Player.Instance.OnGround)
+            {
+                Player.Instance.myRigid.velocity = Vector2.zero;
+            }
         }
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,8 +31,9 @@ public class AttackBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player.Instance.Attack = false;
+        animator.GetComponent<Character>().Attack = false;
         animator.ResetTrigger("attack1");
+        animator.ResetTrigger("throw");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
