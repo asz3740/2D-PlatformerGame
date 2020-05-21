@@ -513,7 +513,7 @@ Animator:
   m_GameObject: {fileID: 5771025906570419322}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 19280b28649e0a549958641ef21434fb, type: 2}
+  m_Controller: {fileID: 9100000, guid: f37bc46acc1639748981bb59d5ed5127, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -588,8 +588,8 @@ MonoBehaviour:
   ShurikenPrefab: {fileID: 1545806602296978, guid: 9e4577abe56a95f4a91d29a0473cd30c,
     type: 3}
   movementSpeed: 5
-  meleeRange: 2
-  throwRange: 5
+  meleeRange: 4
+  throwRange: 15
 --- !u!1 &6736664902982549718
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,10 +12,12 @@ GameObject:
   - component: {fileID: 198159274938206214}
   - component: {fileID: 199368054502676096}
   - component: {fileID: 114960206652300638}
-  - component: {fileID: 2283587736970187105}
+  - component: {fileID: 1983322881}
+  - component: {fileID: 1983322880}
+  - component: {fileID: 6595395240731595771}
   m_Layer: 0
   m_Name: CFX_Magical_Source
-  m_TagString: Untagged
+  m_TagString: ThrowEnemyObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1545806602296978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 4824551249195714}
   - {fileID: 4121807606471962}
@@ -4689,7 +4691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
---- !u!50 &2283587736970187105
+--- !u!50 &1983322881
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -4710,6 +4712,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1983322880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545806602296978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b32f28aec0f134988af5add1138ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 30
+--- !u!58 &6595395240731595771
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545806602296978}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.04268825}
+  serializedVersion: 2
+  m_Radius: 1.268755
 --- !u!1 &1611160775618410
 GameObject:
   m_ObjectHideFlags: 0

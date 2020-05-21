@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class MeleeState : IEnemyState
@@ -16,7 +17,16 @@ public class MeleeState : IEnemyState
     
     public void Execute()
     {
-        Attack(); 
+        Attack();
+        if (enemy.InThrowRange && !enemy.InMeleeRange)
+        {
+            enemy.ChangeState(new RangedState());
+        }
+        else if (enemy.Target == null)
+        {
+            enemy.ChangeState(new IdleState());
+        }
+        
     }
 
     public void Exit()
@@ -42,6 +52,7 @@ public class MeleeState : IEnemyState
         if (canAttack)
         {
             canAttack = false;
+            Debug.Log("attack");
             enemy.MyAnim.SetTrigger("attack");
         }
     }

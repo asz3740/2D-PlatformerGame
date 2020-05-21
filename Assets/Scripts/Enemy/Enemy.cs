@@ -42,6 +42,10 @@ public class Enemy : Character
     }
 
 
+    public override bool IsDead
+    {
+        get { return health <= 0; }
+    }
 
     public override void Start()
     {
@@ -54,6 +58,18 @@ public class Enemy : Character
         currentState.Execute();
         //
         LookAtTarget();
+    }
+
+    public override IEnumerator TakeDamage()
+    {
+        health -= 10;
+
+        if (IsDead)
+        {
+            MyAnim.SetTrigger(("die"));
+            yield return null;
+        }
+        
     }
 
     private void LookAtTarget()
@@ -96,8 +112,9 @@ public class Enemy : Character
          return !facingRight ? Vector2.right : Vector2.left ;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
     }
     
