@@ -115,7 +115,7 @@ public class Player : Character
             MyAnim.SetBool("land",true);
         }
 
-        if (!Attack && (OnGround || airControl))
+        if (!Attack)
         {
             myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
         }
@@ -129,55 +129,44 @@ public class Player : Character
         
     }
 
-    // private int count1;
-    // private int count
-    // private void HandleAttacks(float horizontal)
-    // {
-    //     attackTimer += Time.deltaTime;
-    //     if ((attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && attackTimer > 0.5) || (attack && !this.myAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && extraAttacks > 4))
-    //     {
-    //         count1++;
-    //         Debug.Log("1-" +count1);
-    //         myAnim.SetTrigger("attack1");
-    //         // StartCoroutine(DoAttack());
-    //         myRigid.velocity = Vector2.zero;
-    //         transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
-    //         extraAttacks = 2;
-    //         attackTimer = 0;
-    //     }
-    //     else if (attack && extraAttacks > 0 && extraAttacks <= 4 && attackTimer <= 0.5)
-    //     {
-    //         count2++;
-    //         Debug.Log("2-" +count2);
-    //         myAnim.SetTrigger("attack" +extraAttacks);
-    //         // StartCoroutine(DoAttack());
-    //         extraAttacks++;
-    //         myRigid.velocity = Vector2.zero;
-    //         transform.Translate(new Vector3(0.1f * horizontal, 0, 0));
-    //         attackTimer = 0;
-    //     }
-    // }
-    // int count=0;
-    // IEnumerator DoAttack()
-    // {
-    //     
-    //     count++;
-    //     Debug.Log(count);
-    //     attackHitBox.SetActive(true);
-    //     yield return new WaitForSeconds(0.1f);
-    //     attackHitBox.SetActive(false);
-    // }
-
-    // private void AttackHitBoxOn()
-    // {
-    //     attackHitBox.SetActive(true);
-    // }
-    //
-    // private void AttackHitBoxOff()
-    // {
-    //     attackHitBox.SetActive(false);
-    // }
-    //
+    IEnumerator HandleAttacks()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        
+        attackTimer += Time.deltaTime;
+        if ((!this.MyAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && attackTimer > 0.5) && extraAttacks == 1)
+        {
+            Debug.Log(extraAttacks);
+            MyAnim.SetTrigger("attack1");
+            //StartCoroutine(DoAttack());
+            myRigid.velocity = Vector2.zero;
+            transform.Translate(new Vector3(0.1f * horizontal, myRigid.velocity.y));
+            extraAttacks++;
+            attackTimer = 0;
+        }
+        else if (extraAttacks > 0 && extraAttacks <= 4 && attackTimer <= 0.5)
+        {
+            Debug.Log(extraAttacks);
+            MyAnim.SetTrigger("attack" +extraAttacks);
+            if (extraAttacks == 4)
+            {
+                transform.Translate(new Vector3(0.2f * horizontal, myRigid.velocity.y));
+                extraAttacks = 1;
+            }
+            else
+            {
+                extraAttacks++;
+                myRigid.velocity = Vector2.zero;
+            }
+            attackTimer = 0;
+        }
+        else
+        {
+            extraAttacks = 1;
+        }
+        
+        yield return null;
+    }
 
 
     private void HandleInput()
@@ -186,7 +175,7 @@ public class Player : Character
         {
             MyAnim.SetTrigger("jump");
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.J))
         {
             print("1."+Attack);
             MyAnim.SetTrigger("attack1");
