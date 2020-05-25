@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,11 @@ public abstract class Character : MonoBehaviour
     
     [SerializeField]
     private GameObject ShurikenPrefab;
+
+    [SerializeField]
+    protected int health;
+
+    public abstract bool IsDead { get; }
     
     [SerializeField] 
     protected float movementSpeed;
@@ -30,6 +36,8 @@ public abstract class Character : MonoBehaviour
     {
         
     }
+    
+    public abstract IEnumerator TakeDamage();
 
     public void ChangeDirection()
     {
@@ -58,7 +66,7 @@ public abstract class Character : MonoBehaviour
         {
             GameObject temp = (GameObject)Instantiate(ShurikenPrefab, ShurikenPos.position, Quaternion.identity);
             temp.GetComponent<Shuriken>().Initialize(Vector2.right);
-         
+          
         }
         else
         {
@@ -66,8 +74,14 @@ public abstract class Character : MonoBehaviour
             temp.GetComponent<Shuriken>().Initialize(Vector2.left);
         }
     }
-    
 
-    
-    
+   
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "ThrowObject")
+        {
+            StartCoroutine(TakeDamage());
+        }
+    }
 }

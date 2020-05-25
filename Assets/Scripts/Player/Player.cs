@@ -69,6 +69,11 @@ public class Player : Character
     public bool OnGround { get; set; }
 
 
+    public override bool IsDead
+    {
+        get { return health <= 0; }
+    }
+
  
     public override void Start()
     {
@@ -235,5 +240,10 @@ public class Player : Character
     public override void ThrowObject()
     { 
         base.ThrowObject();
+    }
+
+    public override IEnumerator TakeDamage()
+    {
+        yield return null;
     }
 }
