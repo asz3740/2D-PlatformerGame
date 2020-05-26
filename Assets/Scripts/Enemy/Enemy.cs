@@ -55,16 +55,25 @@ public class Enemy : Character
     
     void Update()
     {
-        currentState.Execute();
-        //
-        LookAtTarget();
+        if (!IsDead)
+        {
+            if (!TakingDamage)
+            {
+                currentState.Execute();
+            }
+            LookAtTarget();
+        }
     }
 
     public override IEnumerator TakeDamage()
     {
+        print("health"+health);
         health -= 10;
-
-        if (IsDead)
+        if (!IsDead)
+        {
+            MyAnim.SetTrigger("damage");
+        }
+        else
         {
             MyAnim.SetTrigger(("die"));
             yield return null;

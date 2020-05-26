@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class EnemySight : MonoBehaviour
 {
-    [SerializeField] private Enemy enemy;
+    [SerializeField] 
+    private Enemy enemy;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-           
             enemy.Target = other.gameObject;
             print("333"+enemy.Target);
         }

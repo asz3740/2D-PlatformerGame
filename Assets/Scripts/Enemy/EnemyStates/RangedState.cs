@@ -25,7 +25,6 @@ public class RangedState : IEnemyState
         }
         else if (enemy.Target != null)
         {
-            Debug.Log("follow");
             enemy.Move();
         }
         else

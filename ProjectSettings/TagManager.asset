@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Item Database
   - Edge
+  - ThrowObject
+  - ThrowEnemyObject
+  - Sword
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX

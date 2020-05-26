@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackBehaviour : StateMachineBehaviour
+public class DamageBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<Character>().Attack = true;
-        
-        animator.SetFloat("speed",0);
-        
-        if (animator.tag == "Player")
-        {
-            if (Player.Instance.OnGround)
-            {
-                Player.Instance.myRigid.velocity = Vector2.zero;
-            }
-        }
-        
+        animator.GetComponent<Character>().TakingDamage = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -31,17 +19,14 @@ public class AttackBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<Character>().Attack = false;
-        animator.GetComponent<Character>().MeleeAttack();
-        animator.ResetTrigger("attack");
-        animator.ResetTrigger("throw");
+        animator.GetComponent<Character>().TakingDamage = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
-    // override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    // {
-    //     
-    // }
+    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that processes and affects root motion
+    //}
 
     // OnStateIK is called right after Animator.OnAnimatorIK()
     //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

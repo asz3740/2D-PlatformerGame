@@ -18,17 +18,7 @@ public class Player : Character
             return instance;
         }
     }
-
-   
     
-    
-    // [SerializeField]
-    // private Transform[] groundChecks;
-    // [SerializeField] 
-    // private float groundRadius;
-    //
-    // [SerializeField]
-    // private Transform[] groundPoints;
     [SerializeField] 
     private Transform groundCheck;
     [SerializeField] 
@@ -36,39 +26,23 @@ public class Player : Character
     [SerializeField] 
     private Transform groundCheckR;
     
-    // 점프
-    //private bool isGrounded;
-    // [SerializeField]
-    // private LayerMask whatIsGround;
-    //private bool jump;
     [SerializeField]
     private bool airControl;
     [SerializeField]
     private float jumpForce;
-    [SerializeField]
-    private int extraJumps;
-    [SerializeField]
-    private int extraJumpsValue;
+    //[SerializeField]
+    //private int extraJumps;
+    //[SerializeField]
+    //private int extraJumpsValue;
     
-    // 공격
-    //private bool attack;
-    [SerializeField]
-    private int extraAttacks;
     private float attackTimer;
-    //[SerializeField] 
-    //private GameObject attackHitBox;
 
-   
-
-
-    
     public Rigidbody2D myRigid  { get; set; }
-  
     public bool Roll { get; set; }
     public bool Jump { get; set; }
     public bool OnGround { get; set; }
 
-
+    private Vector2 startPos;
     public override bool IsDead
     {
         get { return health <= 0; }
@@ -77,40 +51,35 @@ public class Player : Character
  
     public override void Start()
     {
-        //attackHitBox.SetActive(false);
         base.Start();
-        extraAttacks = 1;
-        extraJumps = extraJumpsValue;
-  
+        //extraJumps = extraJumpsValue;
         myRigid = GetComponent<Rigidbody2D>();
-    
     }
-
     void Update()
     {
+        if (transform.position.y <= -14f)
+        {
+            myRigid.velocity = Vector2.zero;
+            transform.position = startPos;
+        }
         HandleInput();
-        print(instance);
-        print(Attack);
-        print(myRigid.velocity.y);
-        print("jump"+Jump);
-        //Debug.Log(attackTimer);
-        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        if (!TakingDamage)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
 
-        OnGround = IsGrounded();
-        HandleMovement(horizontal);
+            OnGround = IsGrounded();
+            
+            HandleMovement(horizontal);
         
-        Flip(horizontal);
-        
-        //HandleAttacks(horizontal);
-        
-        HandleLayers();
-
+            Flip(horizontal);
+            
+            HandleLayers();
+        }
     }
 
     private void HandleMovement(float horizontal)
@@ -120,7 +89,7 @@ public class Player : Character
             MyAnim.SetBool("land",true);
         }
 
-        if (!Attack)
+        if (!Attack && (OnGround || airControl))
         {
             myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
         }
@@ -134,59 +103,18 @@ public class Player : Character
         
     }
 
-    IEnumerator HandleAttacks()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        
-        attackTimer += Time.deltaTime;
-        if ((!this.MyAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && attackTimer > 0.5) && extraAttacks == 1)
-        {
-            Debug.Log(extraAttacks);
-            MyAnim.SetTrigger("attack1");
-            //StartCoroutine(DoAttack());
-            myRigid.velocity = Vector2.zero;
-            transform.Translate(new Vector3(0.1f * horizontal, myRigid.velocity.y));
-            extraAttacks++;
-            attackTimer = 0;
-        }
-        else if (extraAttacks > 0 && extraAttacks <= 4 && attackTimer <= 0.5)
-        {
-            Debug.Log(extraAttacks);
-            MyAnim.SetTrigger("attack" +extraAttacks);
-            if (extraAttacks == 4)
-            {
-                transform.Translate(new Vector3(0.2f * horizontal, myRigid.velocity.y));
-                extraAttacks = 1;
-            }
-            else
-            {
-                extraAttacks++;
-                myRigid.velocity = Vector2.zero;
-            }
-            attackTimer = 0;
-        }
-        else
-        {
-            extraAttacks = 1;
-        }
-        
-        yield return null;
-    }
-
-
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MyAnim.SetTrigger("jump");
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.J))
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            print("1."+Attack);
-            MyAnim.SetTrigger("attack1");
-            print("2."+Attack);
+            MyAnim.SetTrigger("attack");
         }
-
+        
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             MyAnim.SetTrigger("roll");
@@ -196,10 +124,7 @@ public class Player : Character
         {
             MyAnim.SetTrigger("throw");
         }
-        
     }
-    
-    
 
     private void Flip(float horizontal)
     {
@@ -221,10 +146,6 @@ public class Player : Character
             return false;
     }
 
-
-
-
-
     private void HandleLayers()
     {
         if (!OnGround)
@@ -244,6 +165,16 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
+        health -= 10;
+        if (!IsDead)
+        {
+            MyAnim.SetTrigger("damage");
+        }
+        else
+        {
+            MyAnim.SetLayerWeight(1,0);
+            MyAnim.SetTrigger("die");
+        }
         yield return null;
     }
 }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 199368054502676096}
   - component: {fileID: 114960206652300638}
   - component: {fileID: 1983322881}
-  - component: {fileID: 1983322880}
   - component: {fileID: 6595395240731595771}
   m_Layer: 0
   m_Name: CFX_Magical_Source
@@ -4706,25 +4705,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1983322880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545806602296978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b32f28aec0f134988af5add1138ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
 --- !u!58 &6595395240731595771
 CircleCollider2D:
   m_ObjectHideFlags: 0
