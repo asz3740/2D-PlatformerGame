@@ -71,8 +71,11 @@ public class Player : Character
         myRigid = GetComponent<Rigidbody2D>();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         spriteRenderer = GetComponent<SpriteRenderer>();
 =======
+=======
+>>>>>>> parent of bacbeb6... 맵이동
 =======
 >>>>>>> parent of bacbeb6... 맵이동
     }
