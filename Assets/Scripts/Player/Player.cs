@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UIElements;
 
 
 public class Player : Character
@@ -34,8 +35,9 @@ public class Player : Character
     //private int extraJumps;
     //[SerializeField]
     //private int extraJumpsValue;
-    
-    private float attackTimer;
+
+    private BoxCollider2D boxCollider;
+    private Animator animator;
 
     public Rigidbody2D myRigid  { get; set; }
     public bool Roll { get; set; }
@@ -54,6 +56,11 @@ public class Player : Character
         base.Start();
         //extraJumps = extraJumpsValue;
         myRigid = GetComponent<Rigidbody2D>();
+        
+        DontDestroyOnLoad(this.gameObject);
+        
+        boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -89,7 +96,7 @@ public class Player : Character
             MyAnim.SetBool("land",true);
         }
 
-        if (!Attack && (OnGround || airControl))
+        if (!Attack)
         {
             myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
         }
@@ -110,10 +117,11 @@ public class Player : Character
             MyAnim.SetTrigger("jump");
         }
         
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(0))
         {
             MyAnim.SetTrigger("attack");
         }
+
         
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {

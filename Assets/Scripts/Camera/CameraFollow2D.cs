@@ -15,6 +15,8 @@ public class CameraFollow2D : MonoBehaviour
         if (m_Target==null){
             m_Target = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        
+        DontDestroyOnLoad(this.gameObject); 
     }
 
     void Update() {
