@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public delegate void DeadEventHandler();
 
 public class Player : Character
 {
+
     private static Player instance;
     public event DeadEventHandler Dead;
     
@@ -31,19 +33,21 @@ public class Player : Character
     private bool airControl;
     [SerializeField]
     private float jumpForce;
-
-    private bool immortal = false;
     
+    private bool immortal = false;
+
     [SerializeField]
     private float immortalTime;
 
     private SpriteRenderer spriteRenderer;
+    
     //[SerializeField]
     //private int extraJumps;
     //[SerializeField]
     //private int extraJumpsValue;
-    
-    private float attackTimer;
+
+    private BoxCollider2D boxCollider;
+    private Animator animator;
 
     public Rigidbody2D myRigid  { get; set; }
     public bool Roll { get; set; }
@@ -69,27 +73,13 @@ public class Player : Character
         base.Start();
         //extraJumps = extraJumpsValue;
         myRigid = GetComponent<Rigidbody2D>();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-    void FixedUpdate()
-    {
-        if (!TakingDamage && !IsDead)
-        {
-            float horizontal = Input.GetAxis("Horizontal");
-
-            OnGround = IsGrounded();
-            
-            HandleMovement(horizontal);
         
-            Flip(horizontal);
-            
-            HandleLayers();
-        }
+        DontDestroyOnLoad(this.gameObject);
+        
+        boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
-
-
-    
     void Update()
     {
         if (!TakingDamage && !IsDead)
@@ -110,6 +100,24 @@ public class Player : Character
             Dead();
         }
     }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (!TakingDamage && !IsDead)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+
+            OnGround = IsGrounded();
+            
+            HandleMovement(horizontal);
+        
+            Flip(horizontal);
+            
+            HandleLayers();
+        }
+    }
+
     private void HandleMovement(float horizontal)
     {
         if (myRigid.velocity.y < 0)
@@ -117,16 +125,14 @@ public class Player : Character
             MyAnim.SetBool("land",true);
         }
 
-        if (!Attack && (OnGround || airControl))
+        if (!Attack)
         {
             myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
         }
 
         if (Jump && myRigid.velocity.y == 0)
         {
-            
             myRigid.AddForce(new Vector2(0, jumpForce));
-
         }
         
         MyAnim.SetFloat("speed", Mathf.Abs(horizontal));
@@ -140,10 +146,11 @@ public class Player : Character
             MyAnim.SetTrigger("jump");
         }
         
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(0))
         {
             MyAnim.SetTrigger("attack");
         }
+
         
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -195,20 +202,21 @@ public class Player : Character
 
     private IEnumerator IndicateImmortal()
     {
-        if (immortal)
-        {
-            spriteRenderer.enabled = false;
-            yield return new WaitForSeconds(.1f);
-            spriteRenderer.enabled = true;
-            yield return new WaitForSeconds(.1f);
-        }
+            if (immortal)
+            {
+                spriteRenderer.enabled = false;
+                yield return new WaitForSeconds(.1f);
+                spriteRenderer.enabled = true;
+                yield return new WaitForSeconds(.1f);
+            }
     }
+
     public override IEnumerator TakeDamage()
     {
         if (!immortal)
         {
             health -= 10;
-            
+
             if (!IsDead)
             {
                 MyAnim.SetTrigger("damage");
@@ -216,15 +224,16 @@ public class Player : Character
 
                 StartCoroutine(IndicateImmortal());
                 yield return new WaitForSeconds(immortalTime);
-                
-                immortal = false; 
+
+                immortal = false;
             }
             else
             {
-                MyAnim.SetLayerWeight(1,0);
+                MyAnim.SetLayerWeight(1, 0);
                 MyAnim.SetTrigger("die");
             }
         }
+
         yield return null;
     }
 }

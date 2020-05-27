@@ -27,11 +27,11 @@ public abstract class Character : MonoBehaviour
     public bool TakingDamage { get; set; }
     
     public Animator MyAnim { get; private set; }
-
     public CapsuleCollider2D SwordCollider
     {
         get { return swordCollider; }
     }
+
     
     public virtual void Start()
     {
