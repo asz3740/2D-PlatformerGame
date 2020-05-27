@@ -8,6 +8,7 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="DamageBehaviour.cs" t="Include" />
         <e p="MetroidvaniaController" t="Include">
           <e p="Animation" t="Include">
             <e p="Scripts" t="Include">
@@ -94,11 +95,17 @@
           <e p="InventoryTest" t="Include">
             <e p="Inventory.cs" t="Include" />
           </e>
+          <e p="Map" t="Include">
+            <e p="TransferMap.cs" t="Include" />
+          </e>
           <e p="Player" t="Include">
             <e p="Character.cs" t="Include" />
             <e p="NewBehaviourScript.cs" t="Include" />
             <e p="Player.cs" t="Include" />
             <e p="Shuriken.cs" t="Include" />
+          </e>
+          <e p="Portal" t="Include">
+            <e p="Portal.cs" t="Include" />
           </e>
         </e>
         <e p="Spine" t="Include">
