@@ -70,8 +70,11 @@ public class Player : Character
         //extraJumps = extraJumpsValue;
         myRigid = GetComponent<Rigidbody2D>();
 <<<<<<< HEAD
+<<<<<<< HEAD
         spriteRenderer = GetComponent<SpriteRenderer>();
 =======
+=======
+>>>>>>> parent of bacbeb6... 맵이동
     }
     void Update()
     {
