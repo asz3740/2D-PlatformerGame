@@ -69,27 +69,9 @@ public class Player : Character
         base.Start();
         //extraJumps = extraJumpsValue;
         myRigid = GetComponent<Rigidbody2D>();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         spriteRenderer = GetComponent<SpriteRenderer>();
-=======
-=======
->>>>>>> parent of bacbeb6... 맵이동
-=======
->>>>>>> parent of bacbeb6... 맵이동
     }
-    void Update()
-    {
-        if (transform.position.y <= -14f)
-        {
-            myRigid.velocity = Vector2.zero;
-            transform.position = startPos;
-        }
-        HandleInput();
->>>>>>> parent of bacbeb6... 맵이동
-    }
-    
     void FixedUpdate()
     {
         if (!TakingDamage && !IsDead)
