@@ -204,7 +204,7 @@ MonoBehaviour:
     type: 3}
   health: 30
   movementSpeed: 30
-  SwordCollider: {fileID: 351838624}
+  swordCollider: {fileID: 0}
   damageSources:
   - ThrowEnemyObject
   - EnemyAttack
@@ -213,6 +213,7 @@ MonoBehaviour:
   groundCheckR: {fileID: 1541788147}
   airControl: 0
   jumpForce: 1000
+  immortalTime: 0
 --- !u!95 &2364591
 Animator:
   serializedVersion: 3
@@ -1756,6 +1757,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Monster1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771025906570419322, guid: 790076bada949b041a1d6f86f6d53995,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7960410118440037414, guid: 790076bada949b041a1d6f86f6d53995,
         type: 3}
