@@ -16,6 +16,7 @@ public class Portal : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.S))
         {
             SceneManager.LoadScene("Move");
+            Debug.Log("박건도 성공");
         }
     }    
 }
