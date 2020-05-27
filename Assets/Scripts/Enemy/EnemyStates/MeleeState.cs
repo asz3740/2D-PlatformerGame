@@ -7,7 +7,7 @@ public class MeleeState : IEnemyState
 {
     private Enemy enemy;
     private float attackTimer;
-    private float attackCoolDown = 3f;
+    private float attackCoolDown = 4f;
     private bool canAttack = true;
     
     public void Enter(Enemy enemy)

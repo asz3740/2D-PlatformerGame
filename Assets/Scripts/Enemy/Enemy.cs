@@ -44,12 +44,16 @@ public class Enemy : Character
 
     public override bool IsDead
     {
-        get { return health <= 0; }
+        get
+        {
+            return health <= 0;
+        }
     }
 
     public override void Start()
     {
         base.Start();
+        Player.Instance.Dead += new DeadEventHandler(RemoveTarget);
         ChangeState(new IdleState());
     }
     
@@ -64,6 +68,7 @@ public class Enemy : Character
             LookAtTarget();
         }
     }
+
 
     public override IEnumerator TakeDamage()
     {
@@ -80,6 +85,12 @@ public class Enemy : Character
         }
         
     }
+    public void RemoveTarget()
+    {
+        Target = null;
+        ChangeState(new PatrolState());
+    }
+
 
     private void LookAtTarget()
     {

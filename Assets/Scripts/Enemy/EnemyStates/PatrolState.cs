@@ -6,7 +6,7 @@ public class PatrolState : IEnemyState
 {
     private Enemy enemy;
     private float patrolTimer;
-    private float patrolDuration = 10f;
+    private float patrolDuration = 25f;
 
 
     public void Enter(Enemy enemy)
@@ -29,12 +29,13 @@ public class PatrolState : IEnemyState
 
     public void Exit()
     {
+        
     }
-
     public void OnTriggerEnter(Collider2D other)
-    {
+    { 
         if (other.tag == "Edge")
         {
+            Debug.Log("edge");
             enemy.ChangeDirection();
         }
     }
@@ -42,7 +43,6 @@ public class PatrolState : IEnemyState
     private void Patrol()
     {
         patrolTimer += Time.deltaTime;
-        
         if (patrolTimer >= patrolDuration)
         {
             enemy.ChangeState(new IdleState());

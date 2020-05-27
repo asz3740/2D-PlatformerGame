@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public delegate void DeadEventHandler();
 
 public class Player : Character
 {
-
     private static Player instance;
+    public event DeadEventHandler Dead;
     
     public static Player Instance
     {
@@ -30,6 +31,13 @@ public class Player : Character
     private bool airControl;
     [SerializeField]
     private float jumpForce;
+
+    private bool immortal = false;
+    
+    [SerializeField]
+    private float immortalTime;
+
+    private SpriteRenderer spriteRenderer;
     //[SerializeField]
     //private int extraJumps;
     //[SerializeField]
@@ -45,7 +53,14 @@ public class Player : Character
     private Vector2 startPos;
     public override bool IsDead
     {
-        get { return health <= 0; }
+        get
+        {
+            if (health <= 0)
+            {
+                OnDead();
+            }
+            return health <= 0;
+        }
     }
 
  
@@ -54,21 +69,12 @@ public class Player : Character
         base.Start();
         //extraJumps = extraJumpsValue;
         myRigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    void Update()
-    {
-        if (transform.position.y <= -14f)
-        {
-            myRigid.velocity = Vector2.zero;
-            transform.position = startPos;
-        }
-        HandleInput();
-    }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
-        if (!TakingDamage)
+        if (!TakingDamage && !IsDead)
         {
             float horizontal = Input.GetAxis("Horizontal");
 
@@ -82,6 +88,28 @@ public class Player : Character
         }
     }
 
+
+    
+    void Update()
+    {
+        if (!TakingDamage && !IsDead)
+        {
+            if (transform.position.y <= -14f)
+            {
+                myRigid.velocity = Vector2.zero;
+                transform.position = startPos;
+            }
+        }
+        HandleInput();
+    }
+
+    public void OnDead()
+    {
+        if (Dead != null)
+        {
+            Dead();
+        }
+    }
     private void HandleMovement(float horizontal)
     {
         if (myRigid.velocity.y < 0)
@@ -96,7 +124,9 @@ public class Player : Character
 
         if (Jump && myRigid.velocity.y == 0)
         {
+            
             myRigid.AddForce(new Vector2(0, jumpForce));
+
         }
         
         MyAnim.SetFloat("speed", Mathf.Abs(horizontal));
@@ -163,17 +193,37 @@ public class Player : Character
         base.ThrowObject();
     }
 
+    private IEnumerator IndicateImmortal()
+    {
+        if (immortal)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(.1f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
     public override IEnumerator TakeDamage()
     {
-        health -= 10;
-        if (!IsDead)
+        if (!immortal)
         {
-            MyAnim.SetTrigger("damage");
-        }
-        else
-        {
-            MyAnim.SetLayerWeight(1,0);
-            MyAnim.SetTrigger("die");
+            health -= 10;
+            
+            if (!IsDead)
+            {
+                MyAnim.SetTrigger("damage");
+                immortal = true;
+
+                StartCoroutine(IndicateImmortal());
+                yield return new WaitForSeconds(immortalTime);
+                
+                immortal = false; 
+            }
+            else
+            {
+                MyAnim.SetLayerWeight(1,0);
+                MyAnim.SetTrigger("die");
+            }
         }
         yield return null;
     }

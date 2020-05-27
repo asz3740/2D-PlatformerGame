@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e079e0a5d8bf8074c904c6e78dc7299c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  other: {fileID: 0}
+  other: {fileID: 8364271249298629789}
 --- !u!1 &1824351846
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824351847}
-  - component: {fileID: 1824351848}
+  - component: {fileID: 1587322792}
   m_Layer: 10
   m_Name: Attack
   m_TagString: EnemyAttack
@@ -146,8 +146,8 @@ Transform:
   m_Father: {fileID: 1974649835967953598}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &1824351848
-EdgeCollider2D:
+--- !u!70 &1587322792
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -156,22 +156,12 @@ EdgeCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 0.8378825, y: 0.9519525}
-  - {x: 1.6436515, y: 0.9885785}
-  - {x: 0.3967166, y: 0.8946112}
-  - {x: -0.20716143, y: 0.57948285}
-  - {x: -0.38673258, y: 0.08156365}
-  - {x: -0.3734765, y: -0.18600398}
-  - {x: -0.21926546, y: -0.25100034}
-  - {x: -0.02733469, y: -0.32423514}
-  - {x: 0.41650724, y: -0.44436783}
-  - {x: 1.9123569, y: -0.45960343}
+  m_Offset: {x: 0.1960001, y: -0.07699989}
+  m_Size: {x: 0.6680012, y: 1.0180011}
+  m_Direction: 0
 --- !u!1 &1762125646941671638
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e079e0a5d8bf8074c904c6e78dc7299c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  other: {fileID: 0}
+  other: {fileID: 8364271249298629789}
 --- !u!114 &947720496997309116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,8 +654,8 @@ MonoBehaviour:
   ShurikenPrefab: {fileID: 1545806602296978, guid: 9e4577abe56a95f4a91d29a0473cd30c,
     type: 3}
   health: 30
-  movementSpeed: 10
-  SwordCollider: {fileID: 1824351848}
+  movementSpeed: 5
+  swordCollider: {fileID: 1587322792}
   damageSources:
   - ThrowObject
   - Sword

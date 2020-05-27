@@ -18,7 +18,7 @@ public abstract class Character : MonoBehaviour
     protected float movementSpeed;
     protected bool facingRight;
     [SerializeField]
-    private EdgeCollider2D SwordCollider;
+    private CapsuleCollider2D swordCollider;
     [SerializeField] 
     private List<string> damageSources;
     
@@ -27,6 +27,12 @@ public abstract class Character : MonoBehaviour
     public bool TakingDamage { get; set; }
     
     public Animator MyAnim { get; private set; }
+
+    public CapsuleCollider2D SwordCollider
+    {
+        get { return swordCollider; }
+    }
+    
     public virtual void Start()
     {
         facingRight = true;
@@ -80,7 +86,7 @@ public abstract class Character : MonoBehaviour
 
     public void MeleeAttack()
     {
-        SwordCollider.enabled = !SwordCollider.enabled;
+        SwordCollider.enabled = true;
     }
 
     public virtual void OnTriggerEnter2D(Collider2D other)
