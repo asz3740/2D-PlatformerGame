@@ -93,11 +93,17 @@
           <e p="InventoryTest" t="Include">
             <e p="Inventory.cs" t="Include" />
           </e>
+          <e p="Map" t="Include">
+            <e p="TransferMap.cs" t="Include" />
+          </e>
           <e p="Player" t="Include">
             <e p="Character.cs" t="Include" />
             <e p="NewBehaviourScript.cs" t="Include" />
             <e p="Player.cs" t="Include" />
             <e p="Shuriken.cs" t="Include" />
+          </e>
+          <e p="Portal" t="Include">
+            <e p="Portal.cs" t="Include" />
           </e>
         </e>
         <e p="Spine" t="Include">

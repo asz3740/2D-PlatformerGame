@@ -39,7 +39,7 @@ public class Player : Character
     [SerializeField]
     private float immortalTime;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     
     //[SerializeField]
     //private int extraJumps;
@@ -73,8 +73,8 @@ public class Player : Character
         base.Start();
         //extraJumps = extraJumpsValue;
         myRigid = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        
+        //spriteRenderer = GetComponent<SpriteRenderer>();
+
         DontDestroyOnLoad(this.gameObject);
         
         boxCollider = GetComponent<BoxCollider2D>();
@@ -199,24 +199,27 @@ public class Player : Character
     { 
         base.ThrowObject();
     }
-
+    
     private IEnumerator IndicateImmortal()
     {
-            if (immortal)
+        if (immortal)
+        {
+            for (int i = 0; i < 4; i++)
             {
                 spriteRenderer.enabled = false;
                 yield return new WaitForSeconds(.1f);
                 spriteRenderer.enabled = true;
                 yield return new WaitForSeconds(.1f);
             }
+        }
     }
 
     public override IEnumerator TakeDamage()
     {
         if (!immortal)
         {
-            health -= 10;
-
+            health -= 5;
+            print("player"+health);
             if (!IsDead)
             {
                 MyAnim.SetTrigger("damage");
@@ -232,8 +235,7 @@ public class Player : Character
                 MyAnim.SetLayerWeight(1, 0);
                 MyAnim.SetTrigger("die");
             }
+            yield return null;
         }
-
-        yield return null;
     }
 }

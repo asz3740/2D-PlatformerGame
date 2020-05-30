@@ -11,14 +11,18 @@ public abstract class Character : MonoBehaviour
     
     [SerializeField]
     private GameObject ShurikenPrefab;
+    [SerializeField] 
+    private Transform MeleeAttackPos;
+    [SerializeField]
+    private GameObject MeleeAttackPrefab;
 
     [SerializeField]
     protected int health;
     [SerializeField]
     protected float movementSpeed;
     protected bool facingRight;
-    [SerializeField]
-    private CapsuleCollider2D swordCollider;
+    //[SerializeField]
+    //private CapsuleCollider2D swordCollider;
     [SerializeField] 
     private List<string> damageSources;
     
@@ -27,10 +31,10 @@ public abstract class Character : MonoBehaviour
     public bool TakingDamage { get; set; }
     
     public Animator MyAnim { get; private set; }
-    public CapsuleCollider2D SwordCollider
-    {
-        get { return swordCollider; }
-    }
+    // public CapsuleCollider2D SwordCollider
+    // {
+    //     get { return swordCollider; }
+    // }
 
     
     public virtual void Start()
@@ -86,14 +90,20 @@ public abstract class Character : MonoBehaviour
 
     public void MeleeAttack()
     {
-        SwordCollider.enabled = true;
+        Instantiate(MeleeAttackPrefab, MeleeAttackPos.position, Quaternion.identity);
+        //SwordCollider.enabled = true;
     }
 
+    //private int count;
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
+        //count++;
         if (damageSources.Contains(other.tag))
         {
+            print("호출");
+            //print("in" + count);
             StartCoroutine(TakeDamage());
         }
     }
+    
 }
