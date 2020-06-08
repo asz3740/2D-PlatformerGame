@@ -15,7 +15,7 @@ public class Portal : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.S))
         {
-            SceneManager.LoadScene("Move");
+            LoadingSceneManager.LoadScene(transferMapName);
         }
     }    
 }
