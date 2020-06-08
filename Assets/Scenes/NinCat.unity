@@ -204,7 +204,7 @@ MonoBehaviour:
     type: 3}
   health: 30
   movementSpeed: 30
-  swordCollider: {fileID: 0}
+  swordCollider: {fileID: 351838624}
   damageSources:
   - ThrowEnemyObject
   - EnemyAttack
@@ -213,7 +213,7 @@ MonoBehaviour:
   groundCheckR: {fileID: 1541788147}
   airControl: 0
   jumpForce: 1000
-  immortalTime: 0
+  immortalTime: 1
 --- !u!95 &2364591
 Animator:
   serializedVersion: 3
@@ -1132,8 +1132,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!68 &351838624
-EdgeCollider2D:
+--- !u!70 &351838624
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1145,18 +1145,9 @@ EdgeCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 1.8177834, y: 2.1729226}
-  - {x: 3.045693, y: 2.5876648}
-  - {x: 4.072075, y: 2.1377678}
-  - {x: 4.8490434, y: 1.1283666}
-  - {x: 5.0341606, y: 0.008812115}
-  - {x: 4.4876957, y: -1.319289}
-  - {x: 3.5910242, y: -2.256553}
-  - {x: 2.765172, y: -2.6562257}
-  - {x: 2.2383382, y: -2.8489425}
+  m_Offset: {x: 2.3446016, y: -0.088810444}
+  m_Size: {x: 5.1892033, y: 5.331298}
+  m_Direction: 0
 --- !u!4 &351838625
 Transform:
   m_ObjectHideFlags: 0
@@ -1165,7 +1156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351838623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.07, y: 0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2364589}
@@ -1694,10 +1685,6 @@ PrefabInstance:
       propertyPath: other
       value: 
       objectReference: {fileID: 2364588}
-    - target: {fileID: 1824351848, guid: 790076bada949b041a1d6f86f6d53995, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1974649835967953598, guid: 790076bada949b041a1d6f86f6d53995,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1757,11 +1744,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Monster1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5771025906570419322, guid: 790076bada949b041a1d6f86f6d53995,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7960410118440037414, guid: 790076bada949b041a1d6f86f6d53995,
         type: 3}

@@ -6,7 +6,7 @@ public class PatrolState : IEnemyState
 {
     private Enemy enemy;
     private float patrolTimer;
-    private float patrolDuration = 10f;
+    private float patrolDuration = 8f;
 
 
     public void Enter(Enemy enemy)

@@ -42,10 +42,7 @@ public class Enemy : Character
     }
 
 
-    public override bool IsDead
-    {
-        get { return health <= 0; }
-    }
+    public override bool IsDead => health <= 0;
 
     public override void Start()
     {
@@ -74,8 +71,8 @@ public class Enemy : Character
 
     public override IEnumerator TakeDamage()
     {
+
         print("health"+health);
-        health -= 10;
         if (!IsDead)
         {
             MyAnim.SetTrigger("damage");
@@ -85,7 +82,6 @@ public class Enemy : Character
             MyAnim.SetTrigger(("die"));
             yield return null;
         }
-        
     }
 
     private void LookAtTarget()
@@ -133,5 +129,6 @@ public class Enemy : Character
         base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
     }
+    
     
 }
