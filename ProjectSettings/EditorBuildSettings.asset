@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Move.unity
     guid: 639ee67146fca264ea3f1f16557a31ec
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 816045666db28ac4aab31ecb148c4ff6
   m_configObjects: {}
