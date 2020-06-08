@@ -1433,7 +1433,7 @@ MonoBehaviour:
   MeleeAttackPos: {fileID: 182650156}
   MeleeAttackPrefab: {fileID: 3441864975279320202, guid: 5958823edac7aba4ea4066f2e3e3db73,
     type: 3}
-  health: 100
+  health: 30
   movementSpeed: 20
   damageSources:
   - ThrowEnemyObject
@@ -7170,6 +7170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AdvancedSlug
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771025906570419322, guid: 790076bada949b041a1d6f86f6d53995,
+        type: 3}
+      propertyPath: m_TagString
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 7960410118440037414, guid: 790076bada949b041a1d6f86f6d53995,
         type: 3}

@@ -42,7 +42,14 @@ public class Enemy : Character
     }
 
 
-    public override bool IsDead => health <= 0;
+    //public override bool IsDead => health <= 0;
+
+    public override bool IsDead
+    {
+        get { return health <= 0; }
+    }
+
+ 
 
     public override void Start()
     {
@@ -71,7 +78,7 @@ public class Enemy : Character
 
     public override IEnumerator TakeDamage()
     {
-
+        health -= 5;
         print("health"+health);
         if (!IsDead)
         {
@@ -83,6 +90,12 @@ public class Enemy : Character
             yield return null;
         }
     }
+
+    public override void Death()
+    {
+        Destroy(gameObject);
+    }
+
 
     private void LookAtTarget()
     {
@@ -100,11 +113,8 @@ public class Enemy : Character
 
     public void ChangeState(IEnemyState newState)
     {
-        if (currentState != null)
-        {
-            currentState.Exit();
-        }
-        
+        currentState?.Exit();
+
         currentState = newState;
         
         currentState.Enter(this);
@@ -129,6 +139,4 @@ public class Enemy : Character
         base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
     }
-    
-    
 }
