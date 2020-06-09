@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraFollow2D : MonoBehaviour
 {
+    static private CameraFollow2D instance; 
+    
     public float m_DampTime = 10f;
     public Transform m_Target;
     public float m_XOffset = 0;
@@ -12,6 +14,16 @@ public class CameraFollow2D : MonoBehaviour
     private float margin = 0.1f;
 
     void Start () {
+        if (instance != null)
+        {
+            DestroyObject(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        }
+        
         if (m_Target==null){
             m_Target = GameObject.FindGameObjectWithTag("Player").transform;
         }

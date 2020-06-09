@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
 
@@ -6,7 +7,6 @@ public delegate void DeadEventHandler();
 
 public class Player : Character
 {
-
     private static Player instance;
     public event DeadEventHandler Dead;
     
@@ -21,7 +21,7 @@ public class Player : Character
             return instance;
         }
     }
-    
+
     [SerializeField] 
     private Transform groundCheck;
     [SerializeField] 
@@ -67,18 +67,33 @@ public class Player : Character
         }
     }
 
- 
+    public void Awake()
+    {
+        if (null == instance)
+        {
+            //이 클래스 인스턴스가 탄생했을 때 전역변수 instance에 게임매니저 인스턴스가 담겨있지 않다면, 자신을 넣어준다.
+            instance = this;
+
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+
     public override void Start()
     {
-        base.Start();
-        //extraJumps = extraJumpsValue;
-        myRigid = GetComponent<Rigidbody2D>();
-        //spriteRenderer = GetComponent<SpriteRenderer>();
-
         DontDestroyOnLoad(this.gameObject);
         
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+
+        base.Start();
+        //extraJumps = extraJumpsValue;
+        myRigid = GetComponent<Rigidbody2D>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
