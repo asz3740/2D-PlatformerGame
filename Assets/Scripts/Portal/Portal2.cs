@@ -17,7 +17,7 @@ public class Portal2 : MonoBehaviour
         {
             LoadingSceneManager.LoadScene(transferMapName);
             
-            collision.gameObject.transform.position = new Vector2(-10, 0);
+            collision.gameObject.transform.position = new Vector2(0, 0);
         }
     }    
 }
