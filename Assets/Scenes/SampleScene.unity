@@ -333,7 +333,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &374323014
@@ -407,7 +407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b6b4f610224764ab23db88a0d06f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0
 --- !u!1 &499129867
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +746,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &895846483
@@ -914,7 +913,7 @@ SpriteRenderer:
   m_Size: {x: 0.7, y: 0.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1019324188
@@ -1180,19 +1179,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShurikenPos: {fileID: 0}
   ShurikenPrefab: {fileID: 0}
+  MeleeAttackPos: {fileID: 0}
+  MeleeAttackPrefab: {fileID: 0}
+  health: 0
   movementSpeed: 3
+  damageSources: []
   groundCheck: {fileID: 1118993413}
   groundCheckL: {fileID: 2024465951}
   groundCheckR: {fileID: 535713790}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
   airControl: 0
   jumpForce: 5
-  extraJumps: 5
-  extraJumpsValue: 5
-  extraAttacks: 0
-  attackHitBox: {fileID: 309885146}
+  immortalTime: 0
+  spriteRenderer: {fileID: 0}
 --- !u!212 &1541248039
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1241,7 +1239,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &1541248040
