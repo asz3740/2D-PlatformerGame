@@ -1,7 +1,10 @@
 fileFormatVersion: 2
-guid: 48c2c72ef046a234992427ddc2e87b6f
+guid: 44d3ff665bc3755489f0c9dc681d643b
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -3931878874519904897
+    second: platform-block-11_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,24 +43,24 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.8, y: 0.512}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -97,13 +100,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: platform-block-11_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 329
+        height: 275
+      alignment: 9
+      pivot: {x: 0.455, y: 0.55}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -164.5, y: -137.5}
+        - {x: -164.5, y: 41.5}
+        - {x: 164.5, y: 43.5}
+        - {x: 164.5, y: -137.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7dd060eef82f69c0800000000000000
+      internalID: -3931878874519904897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
-    physicsShape:
-    - - {x: -92.5, y: -340.5}
-      - {x: -135.5, y: 185.5}
-      - {x: 135.5, y: 185.5}
-      - {x: 135.5, y: -340.5}
+    physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0

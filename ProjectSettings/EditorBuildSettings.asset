@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/test1.unity
     guid: 039da90bc9d239147bf2d4d32b83973f
   - enabled: 1
-    path: Assets/Scenes/NinCat.unity
+    path: Assets/Scenes/Stage2.unity
     guid: 7a59bc5aa06f78e4b89e2616001e0a05
   - enabled: 1
     path: Assets/Scenes/Move.unity

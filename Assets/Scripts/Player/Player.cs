@@ -8,6 +8,7 @@ public delegate void DeadEventHandler();
 public class Player : Character
 {
     private static Player instance;
+
     public event DeadEventHandler Dead;
     
     public static Player Instance
@@ -139,10 +140,7 @@ public class Player : Character
             MyAnim.SetBool("land",true);
         }
 
-        if (!Attack)
-        {
-            myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
-        }
+        myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
 
         if (Jump && myRigid.velocity.y == 0)
         {
@@ -150,6 +148,7 @@ public class Player : Character
         }
         
         MyAnim.SetFloat("speed", Mathf.Abs(horizontal));
+
         
     }
 
