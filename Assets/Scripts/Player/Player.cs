@@ -9,12 +9,6 @@ public class Player : Character
 {
     private static Player instance;
 
-    // 이동불가 지역
-    private BoxCollider2D _boxCollider;
-    
-    [SerializeField]
-    private LayerMask layerMask;
-    
     public event DeadEventHandler Dead;
     
     public static Player Instance
@@ -155,10 +149,7 @@ public class Player : Character
         
         MyAnim.SetFloat("speed", Mathf.Abs(horizontal));
 
-        RaycastHit2D hit;
-
-        Vector2 start = transform.position;
-        // Vector2 end = start + new Vector2(vector.x * movementSpeed)
+        
     }
 
     private void HandleInput()
