@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PatrolState : IEnemyState
@@ -35,6 +36,7 @@ public class PatrolState : IEnemyState
     {
         if (other.tag == "Edge")
         {
+            Debug.Log("1111111");
             enemy.ChangeDirection();
         }
     }
