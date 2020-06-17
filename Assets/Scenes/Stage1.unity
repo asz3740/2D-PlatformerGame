@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 608530948}
   - component: {fileID: 608530947}
   - component: {fileID: 608530949}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
