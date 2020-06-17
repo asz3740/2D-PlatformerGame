@@ -53,9 +53,6 @@
             <e p="IgnoreCollision.cs" t="Include" />
             <e p="Patrol.cs" t="Include" />
           </e>
-          <e p="Ground" t="Include">
-            <e p="VerticalPlatform.cs" t="Include" />
-          </e>
           <e p="Inventory" t="Include">
             <e p="InventoryButton.cs" t="Include" />
             <e p="InventoryItem.cs" t="Include" />
@@ -69,10 +66,10 @@
             <e p="Inventory.cs" t="Include" />
           </e>
           <e p="Map" t="Include">
-            <e p="Loading" t="Include">
-              <e p="LoadingSceneManager.cs" t="Include" />
-            </e>
-            <e p="TransferMap.cs" t="Include" />
+            <e p="LoadingSceneManager.cs" t="Include" />
+            <e p="Portal.cs" t="Include" />
+            <e p="Portal2.cs" t="Include" />
+            <e p="VerticalPlatform.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
             <e p="Character.cs" t="Include" />
@@ -81,11 +78,11 @@
             <e p="Player.cs" t="Include" />
             <e p="Shuriken.cs" t="Include" />
           </e>
-          <e p="Portal" t="Include">
-            <e p="Portal.cs" t="Include" />
-            <e p="Portal2.cs" t="Include" />
-          </e>
           <e p="SwordCollider.cs" t="Include" />
+          <e p="UI" t="Include">
+            <e p="Area.cs" t="Include" />
+            <e p="Main_Button.cs" t="Include" />
+          </e>
         </e>
         <e p="Spine" t="Include">
           <e p="Editor" t="Include">
