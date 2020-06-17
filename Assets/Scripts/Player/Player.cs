@@ -140,7 +140,11 @@ public class Player : Character
             MyAnim.SetBool("land",true);
         }
 
-        myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
+        if (!Attack && !Roll)
+        {
+            myRigid.velocity = new Vector2(horizontal * movementSpeed, myRigid.velocity.y);
+        }
+       
 
         if (Jump && myRigid.velocity.y == 0)
         {
@@ -190,10 +194,16 @@ public class Player : Character
             (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
             (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))))
         {
+            print(myRigid.velocity.y);
+            print("이잉");
             return true;
+            
         }
         else
+        {
+            print("이잉안함");
             return false;
+        }
     }
 
     private void HandleLayers()
