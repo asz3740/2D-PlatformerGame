@@ -194,8 +194,6 @@ public class Player : Character
             (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
             (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))))
         {
-            print(myRigid.velocity.y);
-            print("이잉");
             return true;
             
         }
@@ -241,7 +239,7 @@ public class Player : Character
     {
         if (!immortal)
         {
-            health -= 5;
+            health -= 10;
             print("player"+health);
             if (!IsDead)
             {

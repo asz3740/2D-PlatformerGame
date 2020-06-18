@@ -17,9 +17,9 @@ public class PatrolState : IEnemyState
     
     public void Execute()
     {
-        Debug.Log("Patrol");
+
         Patrol();
-        //
+        Debug.Log("Patrol");
         enemy.Move();
         //
         if (enemy.Target != null && enemy.InThrowRange)
@@ -30,14 +30,14 @@ public class PatrolState : IEnemyState
 
     public void Exit()
     {
+        
     }
 
     public void OnTriggerEnter(Collider2D other)
     {
-        if (other.tag == "Edge")
+        if (other.CompareTag("ThrowObject"))
         {
-            Debug.Log("1111111");
-            enemy.ChangeDirection();
+            enemy.Target = Player.Instance.gameObject;
         }
     }
     

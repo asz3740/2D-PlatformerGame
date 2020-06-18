@@ -15,6 +15,15 @@ public class Enemy : Character
     [SerializeField] 
     private float throwRange;
 
+    private Vector2 startPos;
+
+    [SerializeField]
+    private Transform leftEdge;
+
+    [SerializeField] 
+    private Transform rightEdge;
+    
+   
     public bool InMeleeRange
     {
         get
@@ -91,10 +100,10 @@ public class Enemy : Character
         }
     }
 
-    public override void Death()
-    {
-        Destroy(gameObject);
-    }
+    // public override void Death()
+    // {
+    //     Destroy(gameObject);
+    // }
 
 
     private void LookAtTarget()
@@ -124,8 +133,16 @@ public class Enemy : Character
     {
         if (!Attack)
         {
-            MyAnim.SetFloat("speed",1);
-            transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+            if ((GetDirection().x > 0 && transform.position.x < rightEdge.position.x) ||
+                (GetDirection().x < 0 && transform.position.x > leftEdge.position.x))
+            {
+                MyAnim.SetFloat("speed",1);
+                transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+            }
+            else if (currentState is PatrolState)
+            {
+                ChangeDirection();
+            }
         }
     }
 
@@ -136,7 +153,16 @@ public class Enemy : Character
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Hit");
         base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
+    }
+    
+    public override void Death()
+    {
+        MyAnim.ResetTrigger("die");
+        MyAnim.SetTrigger("idle");
+        health = 30;
+        transform.position = startPos;
     }
 }

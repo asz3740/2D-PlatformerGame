@@ -42,8 +42,9 @@ GameObject:
   - component: {fileID: 1620707705}
   - component: {fileID: 1620707706}
   - component: {fileID: 7960410118440037414}
-  m_Layer: 9
-  m_Name: Sight (1)
+  - component: {fileID: 373446648}
+  m_Layer: 0
+  m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +77,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14349961, y: 0.4708196}
+  m_Offset: {x: 0.8482661, y: 0.4708196}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -87,7 +88,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.8912654, y: 1.1416519}
+  m_Size: {x: 9.874797, y: 1.1416519}
   m_EdgeRadius: 0
 --- !u!114 &1620707706
 MonoBehaviour:
@@ -115,6 +116,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+--- !u!50 &373446648
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620707703}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1824351846
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,13 +147,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1824351847}
   - component: {fileID: 1257666264}
-  m_Layer: 10
+  - component: {fileID: 8086558628735316628}
+  - component: {fileID: 4052324587513392202}
+  m_Layer: 9
   m_Name: AttackCollider
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1824351847
 Transform:
   m_ObjectHideFlags: 0
@@ -162,6 +186,32 @@ CapsuleCollider2D:
   m_Offset: {x: 0.086024284, y: 0}
   m_Size: {x: 0.67204857, y: 1.0407238}
   m_Direction: 0
+--- !u!114 &8086558628735316628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824351846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bc284ec1a32d54eb3e4f1ee1874e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: Player
+--- !u!114 &4052324587513392202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824351846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e079e0a5d8bf8074c904c6e78dc7299c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 0}
 --- !u!1 &1762125646941671638
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,11 +591,11 @@ GameObject:
   - component: {fileID: 8009411909281360670}
   - component: {fileID: 8364271249298629789}
   - component: {fileID: 1266393255}
-  - component: {fileID: 1266393257}
   - component: {fileID: 947720496997309116}
+  - component: {fileID: 405564078}
   m_Layer: 9
   m_Name: AdvancedSlug
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -625,19 +675,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1266393257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5771025906570419322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e079e0a5d8bf8074c904c6e78dc7299c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  other: {fileID: 0}
 --- !u!114 &947720496997309116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,14 +690,31 @@ MonoBehaviour:
   ShurikenPos: {fileID: 1174862653}
   ShurikenPrefab: {fileID: 1545806602296978, guid: 9e4577abe56a95f4a91d29a0473cd30c,
     type: 3}
+  MeleeAttackPos: {fileID: 1174862653}
+  MeleeAttackPrefab: {fileID: 3441864975279320202, guid: 8f551a763fc9c9d419b1469837ed09c1,
+    type: 3}
   health: 50
   movementSpeed: 5
-  swordCollider: {fileID: 1257666264}
   damageSources:
   - ThrowObject
   - Sword
-  meleeRange: 3
-  throwRange: 10
+  meleeRange: 4
+  throwRange: 12
+  leftEdge: {fileID: 0}
+  rightEdge: {fileID: 0}
+--- !u!114 &405564078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5771025906570419322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e079e0a5d8bf8074c904c6e78dc7299c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 0}
 --- !u!1 &6736664902982549718
 GameObject:
   m_ObjectHideFlags: 0
