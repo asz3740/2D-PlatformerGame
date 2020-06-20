@@ -10,7 +10,8 @@ public class Player : Character
     private static Player instance;
 
     public event DeadEventHandler Dead;
-    
+
+
     public static Player Instance
     {
         get
@@ -105,7 +106,6 @@ public class Player : Character
                 Death();
             }
         }
-        HandleInput();
     }
 
     public void OnDead()
@@ -122,9 +122,10 @@ public class Player : Character
         if (!TakingDamage && !IsDead)
         {
             float horizontal = Input.GetAxis("Horizontal");
+            HandleInput();
 
             OnGround = IsGrounded();
-            
+            print(OnGround);
             HandleMovement(horizontal);
         
             Flip(horizontal);
@@ -147,7 +148,7 @@ public class Player : Character
        
 
         if (Jump && myRigid.velocity.y == 0)
-        {
+        { 
             myRigid.AddForce(new Vector2(0, jumpForce));
         }
         
@@ -194,12 +195,12 @@ public class Player : Character
             (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
             (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))))
         {
+            print(myRigid.velocity.y);
             return true;
             
         }
         else
         {
-            print("이잉안함");
             return false;
         }
     }

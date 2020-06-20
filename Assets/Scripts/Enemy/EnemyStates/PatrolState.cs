@@ -7,11 +7,12 @@ public class PatrolState : IEnemyState
 {
     private Enemy enemy;
     private float patrolTimer;
-    private float patrolDuration = 8f;
+    private float patrolDuration;
 
 
     public void Enter(Enemy enemy)
     {
+        patrolDuration = Random.Range(1, 10);
         this.enemy = enemy;
     }
     

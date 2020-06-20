@@ -16,9 +16,8 @@ public class LandBeheviour : StateMachineBehaviour
         if (Player.Instance.OnGround)
         {
             animator.SetBool("land",false);
-            //animator.ResetTrigger("jump");
+            animator.ResetTrigger("jump");
         }
-        //Player.Instance.myRigid
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -81,6 +81,7 @@
           <e p="UI" t="Include">
             <e p="Area.cs" t="Include" />
             <e p="Main_Button.cs" t="Include" />
+            <e p="Stat.cs" t="Include" />
           </e>
         </e>
         <e p="Spine" t="Include">

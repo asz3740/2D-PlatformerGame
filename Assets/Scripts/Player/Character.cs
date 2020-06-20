@@ -17,7 +17,9 @@ public abstract class Character : MonoBehaviour
     private GameObject MeleeAttackPrefab;
 
     [SerializeField]
-    protected int health;
+    public int health;
+    [SerializeField]
+    protected int maxhealth;
     [SerializeField]
     protected float movementSpeed;
     protected bool facingRight;

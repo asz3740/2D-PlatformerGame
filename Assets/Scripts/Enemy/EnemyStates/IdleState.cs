@@ -8,10 +8,11 @@ public class IdleState : IEnemyState
 
     private float idleTimer;
 
-    private float idleDuration = 4f;
+    private float idleDuration;
 
     public void Enter(Enemy enemy)
     {
+        idleDuration = Random.Range(1, 10);
         this.enemy = enemy;
     }
     
